@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.tupol.sample_1.model">
+
+	<class name="Customer" table="customers" batch-size="10">
+
+		<id name="id" column="id">
+			<generator class="uuid" />
+		</id>
+
+		<property name="name" index="IDX_CUSTOMER_NAME" />
+
+		<set name="orders" cascade="all" inverse="true" >
+            <key column="customer_id" />
+            <one-to-many class="Order"/>
+        </set>
+
+	</class>
+
+
+	<class name="Order" table="orders" batch-size="10">
+
+		<id name="id" column="id">
+			<generator class="uuid" />
+		</id>
+
+		<property name="timestamp" type="timestamp" />
+		<many-to-one name="customer" column="customer_id" not-null="true" />
+
+		<list name="items" table="order_items" lazy="false" cascade="save-update, delete, merge, refresh">
+			<key column="order_id" />
+			<list-index column="item_no" base="1" />
+			<composite-element class="Order$OrderItem">
+				<property name="name" not-null="true" />
+				<property name="quantity" not-null="true" />
+				<property name="price" not-null="true" />
+			</composite-element>
+		</list>
+		<!-- Since I noticed that the formula is not very reliable across various RDBMS engines, 
+		the total is implemented in the Order class -->
+		<!-- 
+		<property name="total" type="double" formula="( select sum(i.quantity*i.price) from
+				order_items i where 
+				i.order_id = id )" />
+ 		-->
+	</class>
+
+
+</hibernate-mapping>
