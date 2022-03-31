@@ -7,7 +7,7 @@
 	<name>TriviDao</name>
 	<description>Trivial DAO Support Framework over Spring and Hibernate</description>
 	<properties>
-		<spring.version>3.2.15.RELEASE</spring.version>
+		<spring.version>5.3.18</spring.version>
 		<hibernate.version>3.2.7.ga</hibernate.version>
 		<dbcp.version>1.4</dbcp.version>
 		<hsqldb.version>2.3.2</hsqldb.version>
