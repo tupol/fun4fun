@@ -10,7 +10,7 @@
 		<spring.version>5.3.21</spring.version>
 		<hibernate.version>3.2.7.ga</hibernate.version>
 		<dbcp.version>1.4</dbcp.version>
-		<hsqldb.version>2.3.2</hsqldb.version>
+		<hsqldb.version>2.7.1</hsqldb.version>
 		<aclang.version>3.4</aclang.version>
 	</properties>
 	<dependencies>
